@@ -1,0 +1,10 @@
+{
+    "name": "Blockman Go",
+    "main": "main.js",
+    "ignore": [
+        "build"
+    ],
+    "packageName": "com.sandboxol.blockymods",
+    "versionName": "1.0.0",
+    "versionCode": 1
+}
