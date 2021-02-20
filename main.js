@@ -1,15 +1,16 @@
 events.observeToast();
 
-auto();
+"auto";
+
 toast('start test');
 launch('com.sandboxol.blockymods');
 sleep(5000);
 
 var text = "test_start";
 files.write("/sdcard/text_result.txt", text);
-
+function quanxian(app_quanxian){
     //miui_12
-        if(id("parentPanel").exists()){
+        /* if(id("parentPanel").exists()){
             id("permission_allow_foreground_only_button").click();
             sleep(10000);
             if(className("android.widget.LinearLayout").depth(1).exists()){
@@ -22,7 +23,7 @@ files.write("/sdcard/text_result.txt", text);
                 files.append("/sdcard/text_result.txt", text);
             }
         }
-        else sleep(3000);
+        else sleep(3000); */
 
     //miui_10
     /* if(className("android.widget.FrameLayout").test("要允许 Blockman Go 访问以下权限吗？").exists()){
@@ -39,6 +40,7 @@ files.write("/sdcard/text_result.txt", text);
         }
     }
     else sleep(3000); */
+}
 
 if(className("android.widget.LinearLayout").depth(1).exists()){
     id("btn_sure").findOne().click();
@@ -55,16 +57,14 @@ if(className("android.widget.LinearLayout").depth(1).exists()){
 }
 else sleep(1000);
 
-if()
-
 app.startActivity({
     action: "View", 
-    //data:"mqq://im/chat?chat_type=wpa&version=1&src_type=web&uin=" + qq,
     packageName:"com.sandboxol.blockymods",
-    className: "com.sandboxol.blockymods.view.activity.start.StartActivity"
+    className: "com.sandboxol.blockymods.view.activity.start.StartActivity",
+    root: true
 });
 sleep(3000);
 
-//shell('am kill com.sandboxol.blockymods');
-kill-all;
+shell("am force-stop com.sandboxol.blockymods", true);
+
 toast('end test');
