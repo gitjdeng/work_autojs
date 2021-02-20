@@ -41,8 +41,17 @@ function example_1(Authority){
     }
     else sleep(3000); */
 }
-
-if(className("android.widget.LinearLayout").depth(1).exists()){
+//登录页
+if(className("android.view.ViewGroup").depth(6).exists()){
+    id("editName").findOne().click();
+    setText("1170088800");
+    className("android.widget.FrameLayout").depth(8).findOne().click();
+    setText("jdeng123456"); 
+    id("btn_sign").findOne().click();
+    sleep(2000);
+}
+//游客注册页
+/* if(className("android.widget.LinearLayout").depth(1).exists()){
     id("btn_sure").findOne().click();
     wait_fort('注册成功');
     if(tosat == '注册成功'){
@@ -55,7 +64,7 @@ if(className("android.widget.LinearLayout").depth(1).exists()){
         files.append("/sdcard/text_result.txt", text);
     }
 }
-else sleep(1000);
+else sleep(1000); */
 
 app.startActivity({
     action: "View", 
