@@ -8,6 +8,7 @@ sleep(5000);
 
 var text = "test_start";
 files.write("/sdcard/text_result.txt", text);
+//手机权限
 function example_1(Authority){
     //miui_12
         /* if(id("parentPanel").exists()){
