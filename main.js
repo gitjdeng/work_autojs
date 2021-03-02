@@ -1,6 +1,5 @@
-//import { log } from './lib';
 "auto";
-debugger;
+
 toast('start test');
 launch('com.sandboxol.blockymods');
 
@@ -27,10 +26,10 @@ function example_1(){
         else sleep(3000); */
 
     //miui_10
-    if(className("android.widget.FrameLayout").depth(4).exists()){
-        click(526,1210,100);
-        sleep(10000);
-        if(className("android.widget.LinearLayout").depth(1).exists()){
+    if(id("permission_applicant").exists()){
+        click(360,1162,702,1262);
+        waitForActivity("com.sandboxol.blockymods.view.activity.main.MainActivity");
+        if(className("android.view.ViewGroup").depth(11).drawingOrder(2).indexInParent(0).exists()){
             var text = "\nexample_1 测试权限申请 pass";
             files.append("/sdcard/text_result.txt", text);
         }
@@ -44,15 +43,24 @@ function example_1(){
 }
 example_1();
 
+app.startActivity({
+    action: "View", 
+    packageName:"com.sandboxol.blockymods",
+    className: "com.sandboxol.login.view.activity.login.LoginActivity",
+    root: true
+});
+sleep(3000);
+
 //登录页
 if(className("android.view.ViewGroup").depth(6).exists()){
-    id("editName").findOne().click();
-    setText("1170088800");
-    className("android.widget.FrameLayout").depth(8).findOne().click();
-    setText("jdeng123456"); 
+    id("editName").findOne().setText("1170088800");
+    click(60,472,660,572);
+    className("android.widget.FrameLayout").depth(8).drawingOrder(1).indexInParent(0).findOne().setText("jdeng123456");
     id("btn_sign").findOne().click();
     sleep(2000);
 }
+else sleep(1000);
+
 //游客注册页
 /* if(className("android.widget.LinearLayout").depth(1).exists()){
     id("btn_sure").findOne().click();
@@ -66,8 +74,7 @@ if(className("android.view.ViewGroup").depth(6).exists()){
         var text = "\n游客账号创建 false";
         files.append("/sdcard/text_result.txt", text);
     }
-}
-else sleep(1000); */
+}*/
 
 app.startActivity({
     action: "View", 
