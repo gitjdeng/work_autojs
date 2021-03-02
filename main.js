@@ -1,15 +1,15 @@
-events.observeToast();
-
+//import { log } from './lib';
 "auto";
-
+debugger;
 toast('start test');
 launch('com.sandboxol.blockymods');
-sleep(5000);
 
 var text = "test_start";
 files.write("/sdcard/text_result.txt", text);
+sleep(5000);
+
 //手机权限
-function example_1(Authority){
+function example_1(){
     //miui_12
         /* if(id("parentPanel").exists()){
             id("permission_allow_foreground_only_button").click();
@@ -27,21 +27,23 @@ function example_1(Authority){
         else sleep(3000); */
 
     //miui_10
-    /* if(className("android.widget.FrameLayout").test("要允许 Blockman Go 访问以下权限吗？").exists()){
-        className("android.widget.Button").test("允许").findOne().click();
+    if(className("android.widget.FrameLayout").depth(4).exists()){
+        click(526,1210,100);
         sleep(10000);
         if(className("android.widget.LinearLayout").depth(1).exists()){
-            var text = "\n测试权限申请 pass";
+            var text = "\nexample_1 测试权限申请 pass";
             files.append("/sdcard/text_result.txt", text);
         }
         else
         {
-            var text = "\n测试权限申请 false";
+            var text = "\nexample_1 测试权限申请 false";
             files.append("/sdcard/text_result.txt", text);
         }
     }
-    else sleep(3000); */
+    else sleep(3000);
 }
+example_1();
+
 //登录页
 if(className("android.view.ViewGroup").depth(6).exists()){
     id("editName").findOne().click();
