@@ -62,35 +62,36 @@ app.startActivity({
     className: "com.sandboxol.login.view.fragment.register.RegisterActivity",
     root: true
 });
-sleep(3000);
+sleep(1000);
 
 var ssnn;
 function suiji(){
-    var ss = random(10,1000);
-    //var ssn = String.fromCharCode(ss);
-    var ssn = ss.toString();
-    return ssnn = ssn;
+    ss = random(10,11);
+    //ssn = String.fromCharCode(ss);
+    ssnn = ss.toString();
+    return ssnn;
 }
-suiji();
 
-setText(0,"jdengnv");
+/* do{
+    suiji();
+    setText(0,"test"+ ssnn);
+    setText(1,"a112233");
+    setText(2,"a112233");
+    className("android.widget.Button").findOne().click();
+}
+while(className("android.weiget.TextView").text("账户不能为空").findOne().parent().exists()); */
 
-//setText(0,"test"+ ssnn);
-setText(1,"a112233");
-setText(2,"a112233");
-className("android.widget.Button").findOne().click();
-sleep(2000);
-//var text_1 = className("android.widget.FrameLayout").depth(10).findOne().getText();
-
-/* do()
-while */
+    suiji();
+    setText(0,"test"+ ssnn);
+    setText(1,"a112233");
+    setText(2,"a112233");
+    className("android.widget.Button").findOne().click();
 if(className("android.weiget.TextView").text("用户名已存在").findOne().parent().exists()){
     suiji();
     setText(0,"test"+ ssnn);
-    sleep(3000);
     className("android.widget.Button").findOne().click();
 }
-/* else if(text_1 == ""){
+/* else if(className("android.weiget.TextView").text("账号不能小于6位").findOne().parent().exists()){
 
 } */
 else sleep(1000);
@@ -100,11 +101,8 @@ else sleep(1000);
 //登录页
 staAt();
 if(className("android.view.ViewGroup").depth(6).exists()){
-    //控件限制，暂时只能先全文本输入密码，再更改账号
     setText(0,"1170088800");
     setText(1,"jdeng123456");
-    //click(60,472,660,572);
-    //className("android.widget.FrameLayout").depth(8).drawingOrder(1).indexInParent(0).findOne().setText("jdeng123456");
     id("btn_sign").findOne().click();
     sleep(3000);
 }
