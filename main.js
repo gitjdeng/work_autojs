@@ -6,11 +6,16 @@ launch('com.sandboxol.blockymods');
 var text = "test_start";
 files.write("/sdcard/text_result.txt", text);
 sleep(5000);
-
+//调试窗口
+//console.show();
+var str = "";
+str += device.getAndroidId();
+//log(str);
 //手机权限
 function example_1(){
-    //miui_12
-        /* if(id("parentPanel").exists()){
+    if(str == "Android10"){
+        //miui_12
+        if(id("parentPanel").exists()){
             id("permission_allow_foreground_only_button").click();
             sleep(10000);
             if(className("android.widget.LinearLayout").depth(1).exists()){
@@ -23,23 +28,27 @@ function example_1(){
                 files.append("/sdcard/text_result.txt", text);
             }
         }
-        else sleep(3000); */
-
-    //miui_10
-    if(id("permission_applicant").exists()){
-        click(360,1162,702,1262);
-        waitForActivity("com.sandboxol.blockymods.view.activity.main.MainActivity");
-        if(className("android.view.ViewGroup").depth(11).drawingOrder(2).indexInParent(0).exists()){
-            var text = "\ntest_case1 读写测试权限申请 pass";
-            files.append("/sdcard/text_result.txt", text);
-        }
-        else
-        {
-            var text = "\ntest_case1 读写测试权限申请 false";
-            files.append("/sdcard/text_result.txt", text);
-        }
+        else sleep(3000);
     }
-    else sleep(3000);
+    else if(str == "69c2cdc51b5dc2d6"){
+        //红米5A权限确认
+        if(id("permission_applicant").exists()){
+            //if(className("android.weiget.TextView").text("要允许 Blockman Go 访问以下权限吗？").exists()){
+            click(360,1162,702,1262);
+            waitForActivity("com.sandboxol.blockymods.view.activity.main.MainActivity");
+            if(className("android.view.ViewGroup").depth(11).drawingOrder(2).indexInParent(0).exists()){
+                var text = "\ntest_case1 读写测试权限申请 pass";
+                files.append("/sdcard/text_result.txt", text);
+            }
+            else
+            {
+                var text = "\ntest_case1 读写测试权限申请 false";
+                files.append("/sdcard/text_result.txt", text);
+            }
+        }
+        else sleep(3000);
+    }
+    
 }
 example_1();
 
@@ -64,37 +73,46 @@ app.startActivity({
 });
 sleep(1000);
 
-var ssnn;
+let ssnn;
 function suiji(){
-    ss = random(10,11);
+    ss = random(13,14);
     //ssn = String.fromCharCode(ss);
     ssnn = ss.toString();
     return ssnn;
 }
 
-/* do{
+
+do{
     suiji();
     setText(0,"test"+ ssnn);
     setText(1,"a112233");
     setText(2,"a112233");
     className("android.widget.Button").findOne().click();
+    sleep(3000);
 }
-while(className("android.weiget.TextView").text("账户不能为空").findOne().parent().exists()); */
+while(desc("用户名已存在").findOnce().exists());
 
-    suiji();
+/*     suiji();
     setText(0,"test"+ ssnn);
     setText(1,"a112233");
     setText(2,"a112233");
     className("android.widget.Button").findOne().click();
-if(className("android.weiget.TextView").text("用户名已存在").findOne().parent().exists()){
-    suiji();
-    setText(0,"test"+ ssnn);
-    className("android.widget.Button").findOne().click();
+    sleep(2000);
+if(className("android.widget.TextView").text("用户名已存在").findOne().parent().exists()){
+    while(true){
+        suiji();
+        setText(0,"test"+ ssnn);
+        className("android.widget.Button").findOne().click();
+        sleep(2000);
+        if(id("btu_sure").findOne().exists()){
+            break;
+        }
+    } 
 }
-/* else if(className("android.weiget.TextView").text("账号不能小于6位").findOne().parent().exists()){
-
-} */
-else sleep(1000);
+else if(className("android.widget.TextView").text("账号不能小于6位").findOne().parent().exists()){
+    sleep(100);
+} 
+else sleep(1000); */
 
 
 
