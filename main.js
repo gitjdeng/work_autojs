@@ -1,5 +1,7 @@
-"auto";
+const lib = require("lib");
+const tlist = require("tlist");
 
+"auto";
 toast('start test');
 launch('com.sandboxol.blockymods');
 
@@ -8,11 +10,12 @@ files.write("/sdcard/text_result.txt", text);
 sleep(5000);
 //调试窗口
 //console.show();
-var str = "";
-str += device.getAndroidId();
 //log(str);
+
 //手机权限
 function example_1(){
+    var str = "";
+    str += device.getAndroidId();
     if(str == "Android10"){
         //miui_12
         if(id("parentPanel").exists()){
@@ -48,19 +51,12 @@ function example_1(){
         }
         else sleep(3000);
     }
-    
 }
+
 example_1();
 
-function staAt(){
-    app.startActivity({
-        action: "View", 
-        packageName:"com.sandboxol.blockymods",
-        className: "com.sandboxol.login.view.activity.login.LoginActivity",
-        root: true
-    });
-    sleep(3000);
-}
+tlist.staAt();
+
 //注册账号
 /* staAt();
 id("tv_register").findOne().click();
