@@ -153,6 +153,7 @@ app.startActivity({
 });
 sleep(3000);
 sleep(3000);
+sleep(3000);
 shell("am force-stop com.sandboxol.blockymods", true);
 
 toast('end test');
