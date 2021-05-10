@@ -18,17 +18,19 @@ var text = "test_start";
 files.write("/sdcard/text_result.txt", text);
 sleep(5000);
 //调试窗口
-//console.show();
-//log(str);
+/* console.show();
+var str = "";
+str += device.getAndroidId();
+log(str); */
 
 //手机权限----------------------------------------------------------------------
 function Authority(){
     var str = "";
     str += device.getAndroidId();
-    if(str == "Android10"){
-        //miui_12
-        if(id("parentPanel").exists()){
-            id("permission_allow_foreground_only_button").click();
+    if(str == "d5e0791a02a27abd"){
+        //miui_12 mi_note2
+        if(className("android.widget.TextView").text("要允许 Blockman GO 访问以下权限吗？").exists()){
+            click(560,1710,1000,1850);
             sleep(10000);
             if(className("android.widget.LinearLayout").depth(1).exists()){
                 var text = "\n测试权限申请 pass";
@@ -63,12 +65,29 @@ function Authority(){
 }
 
 Authority();
+sleep(3000);
 
 //注册账号----------------------------------------------------------------------------
+if (id("btn_sign").exists()){
+    setText(0,"1170088800");
+    setText(1,"a112233");
+    id("btn_sign").findOne().click();
+    sleep(3000);
+}
+else {
+    app.startActivity({
+        action: "View", 
+        packageName:"com.sandboxol.blockymods",
+        className: "com.sandboxol.login.view.activity.login.LoginActivity",
+        root: true
+    });
+    sleep(1000);
+}
+
 app.startActivity({
     action: "View", 
     packageName:"com.sandboxol.blockymods",
-    className: "com.sandboxol.login.view.fragment.register.RegisterActivity",
+    className: "com.sandboxol.common.base.app.MTTemplateActivity",
     root: true
 });
 sleep(1000);
@@ -152,7 +171,7 @@ app.startActivity({
     root: true
 });
 sleep(3000);
-sleep(3000);sleep(3000);
+
 shell("am force-stop com.sandboxol.blockymods", true);
 
 toast('end test');
