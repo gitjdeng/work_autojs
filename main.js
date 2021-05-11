@@ -1,5 +1,6 @@
 const lib = require("lib");
 const tlist = require("tlist");
+import {staAt} from './tlist';
 
 function staAt(){
     app.startActivity({
@@ -33,12 +34,12 @@ function Authority(){
             click(560,1710,1000,1850);
             sleep(10000);
             if(className("android.widget.LinearLayout").depth(1).exists()){
-                var text = "\n测试权限申请 pass";
+                var text = "\ntest_case1 读写测试权限申请 pass";
                 files.append("/sdcard/text_result.txt", text);
             }
             else
             {
-                var text = "\n测试权限申请 false";
+                var text = "\ntest_case1 读写测试权限申请 false";
                 files.append("/sdcard/text_result.txt", text);
             }
         }
@@ -68,7 +69,7 @@ Authority();
 sleep(3000);
 
 //注册账号----------------------------------------------------------------------------
-if (id("btn_sign").exists()){
+/* if (id("btn_sign").exists()){
     setText(0,"1170088800");
     setText(1,"a112233");
     id("btn_sign").findOne().click();
@@ -82,7 +83,8 @@ else {
         root: true
     });
     sleep(1000);
-}
+} */
+
 
 app.startActivity({
     action: "View", 
@@ -92,7 +94,7 @@ app.startActivity({
 });
 sleep(1000);
 
-let ssnn;
+/* let ssnn;
 function suiji(){
     ss = random(13,14);
     //ssn = String.fromCharCode(ss);
@@ -136,14 +138,14 @@ else if(id("textinput_helper_text").className("android.widget.TextView").text("�
 } 
 else sleep(1000);
 
-id("btu_sure").findOne().click();
+id("btu_sure").findOne().click(); */
 
 
 //登录页
 staAt();
 if(className("android.view.ViewGroup").depth(6).exists()){
     setText(0,"1170088800");
-    setText(1,"jdeng123456");
+    setText(1,"a112233");
     id("btn_sign").findOne().click();
     sleep(3000);
 }
@@ -163,11 +165,10 @@ else sleep(1000);
         files.append("/sdcard/text_result.txt", text);
     }
 }*/
-
 app.startActivity({
     action: "View", 
     packageName:"com.sandboxol.blockymods",
-    className: "com.sandboxol.blockymods.view.activity.start.StartActivity",
+    className: "com.sandboxol.blockymods.view.activity.host.HosttActivity",
     root: true
 });
 sleep(3000);
