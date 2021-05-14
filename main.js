@@ -1,16 +1,6 @@
-const lib = require("lib");
-const tlist = require("tlist");
-import {staAt} from './tlist';
-
-function staAt(){
-    app.startActivity({
-        action: "View", 
-        packageName:"com.sandboxol.blockymods",
-        className: "com.sandboxol.login.view.activity.login.LoginActivity",
-        root: true
-    });
-    sleep(3000);
-}
+const lib = require("lib.js");
+const tlist = require("tlist.js");
+//importClass(org.jsoup.Jsoup);
 
 toast('start test');
 launch('com.sandboxol.blockymods');
@@ -85,71 +75,29 @@ else {
     sleep(1000);
 } */
 
-
-app.startActivity({
-    action: "View", 
-    packageName:"com.sandboxol.blockymods",
-    className: "com.sandboxol.common.base.app.MTTemplateActivity",
-    root: true
-});
-sleep(1000);
-
-/* let ssnn;
-function suiji(){
-    ss = random(13,14);
-    //ssn = String.fromCharCode(ss);
-    ssnn = ss.toString();
-    return ssnn;
-}
-waitForActivity("com.sandboxol.login.view.fragment.register.RegisterActivity");
-    suiji();
-    setText(0,"test"+ ssnn);
-    setText(1,"a112233");
-    setText(2,"a112233");
-    className("android.widget.Button").findOne().click();
-    sleep(2000);
-    //selector.textContains("用户名已存在").findOne().exists()
-    var text_1 = id("textinput_helper_text").className("android.widget.TextView").getText();
-//if(id("textinput_helper_text").className("android.widget.TextView").text("用户名已存在").findOne().parent().exists()){
-if(text_1 == "用户名已存在"){
-    while(true){
-        suiji();
-        setText(0,"test"+ ssnn);
-        className("android.widget.Button").findOne().click();
-        sleep(2000);
-        if(id("btu_sure").findOne().exists()){
-            break;
-        }
-    } 
-}
-else if(id("textinput_helper_text").className("android.widget.TextView").text("账户不能为空").findOne().parent().exists()){
-    while(true){
-        suiji();
-        setText(0,"test"+ ssnn);
-        className("android.widget.Button").findOne().click();
-        sleep(2000);
-        if(id("btu_sure").findOne().exists()){
-            break;
-        }
-    } 
-} 
-else if(id("textinput_helper_text").className("android.widget.TextView").text("账号不能小于6位").findOne().parent().exists()){
-    sleep(100);
-} 
-else sleep(1000);
-
-id("btu_sure").findOne().click(); */
-
-
 //登录页
-staAt();
+//tlist.staAt();
 if(className("android.view.ViewGroup").depth(6).exists()){
     setText(0,"1170088800");
     setText(1,"a112233");
     id("btn_sign").findOne().click();
     sleep(3000);
 }
-else sleep(1000);
+else {
+    let login = "http://mods.sandboxol.com/user/api/v2/app/login";
+    let e_login = http.post(login, {
+        "bmg-device-id": "6577bb9966ec3de9",
+        "OS":"android",
+        "packageName": "blockymods",
+        "userId":"1125900000",
+        "appLanguage": "zh",
+        "appVersion": "4092",
+        "bmg-sign": "f2f90445f9523150cac3fb573a27c32735123bc5",
+        "Access-Token": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI3OTAzNDAwMDAiLCJpYXQiOjE2MjA5ODcyMzAsInN1YiI6IjIwMjEtMDUtMTQgMTA6MTM6NTAiLCJpc3MiOiJTYW5kYm94LVNlY3VyaXR5LUJhc2ljIiwiZXhwIjoxNjI2MTcxMjMwfQ.ZHrMXGJf0KGaECWtZ9L6DnqqHR48mCzx-AEyjzoL4tg",
+        "androidVersion": "30"
+    });
+    toastLog(e_login.body.string());
+}
 
 //游客注册页
 /* if(className("android.widget.LinearLayout").depth(1).exists()){

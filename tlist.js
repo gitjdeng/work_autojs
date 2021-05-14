@@ -1,4 +1,4 @@
-function staAt(){
+var staAt = function staAt(){
     app.startActivity({
         action: "View", 
         packageName:"com.sandboxol.blockymods",
@@ -7,3 +7,4 @@ function staAt(){
     });
     sleep(3000);
 }
+module.exports = staAt;
