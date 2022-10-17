@@ -18,8 +18,8 @@ var text = "test_start";
 files.write("/sdcard/text_result.txt", text);
 sleep(5000);
 //调试窗口
-//console.show();
-//log(str);
+console.show();
+log(str);
 
 //手机权限----------------------------------------------------------------------
 function Authority(){
@@ -62,7 +62,7 @@ function Authority(){
     }
 }
 
-Authority();
+//Authority();
 
 //注册账号----------------------------------------------------------------------------
 app.startActivity({
