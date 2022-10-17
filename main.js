@@ -1,5 +1,6 @@
-const lib = require("lib");
-const tlist = require("tlist");
+//const lib = require("lib");
+//const tlist = require("tlist");
+//const { has_text } = require("./lib");
 
 function staAt(){
     app.startActivity({
@@ -19,10 +20,9 @@ files.write("/sdcard/text_result.txt", text);
 sleep(5000);
 //调试窗口
 console.show();
-log(str);
 
 //手机权限----------------------------------------------------------------------
-function Authority(){
+/* function Authority(){
     var str = "";
     str += device.getAndroidId();
     if(str == "Android10"){
@@ -62,46 +62,53 @@ function Authority(){
     }
 }
 
-//Authority();
+Authority(); */
 
 //注册账号----------------------------------------------------------------------------
 app.startActivity({
     action: "View", 
     packageName:"com.sandboxol.blockymods",
-    className: "com.sandboxol.login.view.fragment.register.RegisterActivity",
+    className: "com.sandboxol.login.view.activity.login.LoginActivity",
     root: true
 });
 sleep(1000);
 
+id("tv_register").findOne().click();
+sleep(1000);
+
 let ssnn;
 function suiji(){
-    ss = random(13,14);
+    ss = random(10,50);
     //ssn = String.fromCharCode(ss);
     ssnn = ss.toString();
     return ssnn;
 }
-waitForActivity("com.sandboxol.login.view.fragment.register.RegisterActivity");
+waitForActivity("com.sandboxol.center.view.activity.MTTemplateActivity");
     suiji();
     setText(0,"test"+ ssnn);
     setText(1,"a112233");
     setText(2,"a112233");
     className("android.widget.Button").findOne().click();
     sleep(2000);
-    //selector.textContains("用户名已存在").findOne().exists()
-    var text_1 = id("textinput_helper_text").className("android.widget.TextView").getText();
-//if(id("textinput_helper_text").className("android.widget.TextView").text("用户名已存在").findOne().parent().exists()){
+
+    var text_1 = className("android.widget.TextView").depth(14).text("用户名已存在");
+
 if(text_1 == "用户名已存在"){
     while(true){
-        suiji();
+        //suiji();
+        ssnn = ssnn + 1;
         setText(0,"test"+ ssnn);
         className("android.widget.Button").findOne().click();
         sleep(2000);
+        console.log();
+
         if(id("btu_sure").findOne().exists()){
             break;
         }
+        break;
     } 
 }
-else if(id("textinput_helper_text").className("android.widget.TextView").text("账户不能为空").findOne().parent().exists()){
+else if(className("android.widget.TextView").depth(14).text("账户不能为空")){
     while(true){
         suiji();
         setText(0,"test"+ ssnn);
@@ -112,12 +119,21 @@ else if(id("textinput_helper_text").className("android.widget.TextView").text("�
         }
     } 
 } 
-else if(id("textinput_helper_text").className("android.widget.TextView").text("账号不能小于6位").findOne().parent().exists()){
-    sleep(100);
+else if(className("android.widget.TextView").depth(14).text("账号不能小于6位")){
+    while(true){
+        suiji();
+        setText(0,"test"+ ssnn);
+        className("android.widget.Button").findOne().click();
+        sleep(2000);
+        if(id("btu_sure").findOne().exists()){
+            break;
+        }
+    } 
 } 
 else sleep(1000);
 
-id("btu_sure").findOne().click();
+    id("btu_sure").findOne().click();
+    sleep(5000);
 
 
 //登录页

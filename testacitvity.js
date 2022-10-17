@@ -1,0 +1,2 @@
+console.show();
+log(currentActivity());
