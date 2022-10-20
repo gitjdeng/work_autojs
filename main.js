@@ -10,9 +10,14 @@ threads.start(function(){
 });
 })
 
+<<<<<<< HEAD
 
 //强行打开登录页---------------------------------------------------------------
 function staLg(){
+=======
+//强行打开登录页---------------------------------------------------------------
+function staAt(){
+>>>>>>> afa0e9d (调整顺序)
     app.startActivity({
         action: "View", 
         packageName:"com.sandboxol.blockymods",
@@ -23,6 +28,7 @@ function staLg(){
     console.log("staLg");
     sleep(3000);
 }
+<<<<<<< HEAD
 //重启app--------------------------------------------------------------------
 function staAt(){
     app.startActivity({
@@ -36,6 +42,8 @@ function staAt(){
     sleep(3000);
     
 }
+=======
+>>>>>>> afa0e9d (调整顺序)
 //手机权限----------------------------------------------------------------------
 function Authority(){
     var str = "";
@@ -79,7 +87,10 @@ function Authority(){
 
 //用例执行入口
 toast('start test');
+<<<<<<< HEAD
 shell("pm clear com.sandboxol.blockymods", true);
+=======
+>>>>>>> afa0e9d (调整顺序)
 launch('com.sandboxol.blockymods');
 
 var text = "test_start";
@@ -88,6 +99,11 @@ sleep(5000);
 
 //调试窗口开启
 //console.show();
+<<<<<<< HEAD
+=======
+
+//Authority();
+>>>>>>> afa0e9d (调整顺序)
 
 //注册账号----------------------------------------------------------------------------
 if(id("tv_register").exists()){
@@ -121,8 +137,54 @@ waitForActivity("com.sandboxol.center.view.activity.MTTemplateActivity");
     className("android.widget.Button").findOne().click();
     sleep(2000);
 
+<<<<<<< HEAD
 if(id("btn_sure").exists()){
     id("btn_sure").findOne().click();
+=======
+    //var text_1 = className("android.widget.TextView").depth(14).text("用户名已存在");
+    //console.log(text_1);
+
+if(className("android.widget.TextView").depth(14).text("用户名已存在")){
+    while(true){
+        ssnn = ssnn++;
+        setText(0,"test"+ ssnn);
+        className("android.widget.Button").findOne().click();
+        sleep(2000);
+
+        if(id("btu_sure").findOne().exists()){
+            id("btu_sure").findOne().click();
+            console.log();
+            break;
+        }
+        break;
+    } 
+}
+else if(className("android.widget.TextView").depth(14).text("账户不能为空")){
+    while(true){
+        suiji();
+        setText(0,"test"+ ssnn);
+        className("android.widget.Button").findOne().click();
+        sleep(2000);
+        if(id("btu_sure").findOne().exists()){
+            break;
+        }
+    } 
+} 
+else if(className("android.widget.TextView").depth(14).text("账号不能小于6位")){
+    while(true){
+        suiji();
+        setText(0,"test"+ ssnn);
+        className("android.widget.Button").findOne().click();
+        sleep(2000);
+        if(id("btu_sure").findOne().exists()){
+            break;
+        }
+    } 
+} 
+else sleep(1000);
+
+    id("btu_sure").findOne().click();
+>>>>>>> afa0e9d (调整顺序)
     sleep(5000);
     console.log(toasttext);
     //出现用户名错误
