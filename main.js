@@ -1,28 +1,39 @@
+auto();
 //const lib = require("lib");
-//const tlist = require("tlist");
-//const { has_text } = require("./lib");
+events.observeToast();
+events.onToast(function(toast){
+    var pkg = toast.getPackageName();
+    log(toast.getText() + pkg);
+});
 
-function staAt(){
+
+//强行打开登录页---------------------------------------------------------------
+function staLg(){
     app.startActivity({
         action: "View", 
         packageName:"com.sandboxol.blockymods",
         className: "com.sandboxol.login.view.activity.login.LoginActivity",
+        data:"",
         root: true
     });
+    console.log("staLg");
     sleep(3000);
 }
-
-toast('start test');
-launch('com.sandboxol.blockymods');
-
-var text = "test_start";
-files.write("/sdcard/text_result.txt", text);
-sleep(5000);
-//调试窗口
-console.show();
-
+//重启app--------------------------------------------------------------------
+function staAt(){
+    app.startActivity({
+        action: "View", 
+        packageName:"com.sandboxol.blockymods",
+        className: "com.sandboxol.blockymods.view.activity.start.StartActivity",
+        data:"",
+        root: true
+    });
+    console.log("staAt");
+    sleep(3000);
+    
+}
 //手机权限----------------------------------------------------------------------
-/* function Authority(){
+function Authority(){
     var str = "";
     str += device.getAndroidId();
     if(str == "Android10"){
@@ -62,27 +73,40 @@ console.show();
     }
 }
 
-Authority(); */
+//用例执行入口
+toast('start test');
+shell("pm clear com.sandboxol.blockymods", true);
+launch('com.sandboxol.blockymods');
+
+var text = "test_start";
+files.write("/sdcard/text_result.txt", text);
+sleep(5000);
+
+//调试窗口开启
+//console.show();
 
 //注册账号----------------------------------------------------------------------------
-app.startActivity({
-    action: "View", 
-    packageName:"com.sandboxol.blockymods",
-    className: "com.sandboxol.login.view.activity.login.LoginActivity",
-    root: true
-});
-sleep(1000);
-
-id("tv_register").findOne().click();
-sleep(1000);
+if(id("tv_register").exists()){
+    id("tv_register").findOne().click();
+    sleep(1000);
+} 
+else{
+        app.startActivity({
+            action: "View", 
+            packageName:"com.sandboxol.blockymods",
+            className: "com.sandboxol.center.view.activity.MTTemplateActivity",
+            data:"",
+            root: true
+        });
+}  
 
 let ssnn;
 function suiji(){
-    ss = random(10,50);
-    //ssn = String.fromCharCode(ss);
+    ss = random(100,105);
     ssnn = ss.toString();
     return ssnn;
 }
+
 waitForActivity("com.sandboxol.center.view.activity.MTTemplateActivity");
     suiji();
     setText(0,"test"+ ssnn);
@@ -91,84 +115,108 @@ waitForActivity("com.sandboxol.center.view.activity.MTTemplateActivity");
     className("android.widget.Button").findOne().click();
     sleep(2000);
 
-    var text_1 = className("android.widget.TextView").depth(14).text("用户名已存在");
+var activitytext = currentActivity();
 
-if(text_1 == "用户名已存在"){
-    while(true){
-        //suiji();
-        ssnn = ssnn + 1;
-        setText(0,"test"+ ssnn);
-        className("android.widget.Button").findOne().click();
-        sleep(2000);
-        console.log();
+if(className("android.widget.TextView").depth(14).findOne().text() != null){
+        while(true){
+            ssnn = ++ssnn;
+            id("editAccount").setText("test"+ ssnn);
+            className("android.widget.Button").text("下一步").findOne().click();
+            sleep(2000);
+            console.log("1");
+            activitytext = currentActivity();
+            //如果进入角色创建页
+            if(id("btn_sure").exists()){
+                while(true){
+                    setText(0,"test01");//lingshi
 
-        if(id("btu_sure").findOne().exists()){
-            break;
-        }
-        break;
-    } 
+                    id("btn_sure").findOne().click();
+                    sleep(5000);
+                    activitytext = currentActivity();
+                    if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
+                        console.log("2");
+                        break;
+                    }
+                    else if(id("textinput_helper_text").findOne().text() != "该名称可用"){
+                        while(true){
+                            id("iv_random_name").findOne().click();
+                            sleep(1000);
+                            id("btn_sure").findOne().click();
+                            sleep(5000);
+                            activitytext = currentActivity();
+                            console.log(toast);
+                            if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
+                                console.log("3");
+                                break;
+                            }
+                        }
+                    }
+                    else if(toast = "账户名称已存在，请重新输入"){
+                        while(true){
+                            ssnn = ++ssnn;
+                            id("editAccount").setText("test"+ ssnn);
+                            className("android.widget.Button").text("下一步").findOne().click();
+                            sleep(2000);
+                            activitytext = currentActivity();
+                            if(id("textinput_helper_text").findOne().text() != "该名称可用"){
+                                while(true){
+                                    id("iv_random_name").findOne().click();
+                                    sleep(1000);
+                                    id("btn_sure").findOne().click();
+                                    sleep(5000);
+                                    activitytext = currentActivity();
+                                    if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
+                                        console.log("8");
+                                        break;
+                                    }
+                                }
+                            }
+                            else if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
+                                console.log("7");
+                                break;
+                            }
+                        }
+                    }
+                    else break;
+                }
+            }
+            else if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
+                console.log("4");
+                break;
+            }
+    }
 }
-else if(className("android.widget.TextView").depth(14).text("账户不能为空")){
-    while(true){
-        suiji();
-        setText(0,"test"+ ssnn);
-        className("android.widget.Button").findOne().click();
-        sleep(2000);
-        if(id("btu_sure").findOne().exists()){
-            break;
-        }
-    } 
-} 
-else if(className("android.widget.TextView").depth(14).text("账号不能小于6位")){
-    while(true){
-        suiji();
-        setText(0,"test"+ ssnn);
-        className("android.widget.Button").findOne().click();
-        sleep(2000);
-        if(id("btu_sure").findOne().exists()){
-            break;
-        }
-    } 
-} 
-else sleep(1000);
-
-    id("btu_sure").findOne().click();
+else if(id("btn_sure").exists()){
+    console.log("5");
+    id("btn_sure").findOne().click();
     sleep(5000);
+}
+
+className("android.widget.Button").text("下一步").findOne().click();
+console.log("7");
+//waitForActivity("com.sandboxol.blockymods.view.activity.host.HostActivity");
+    sleep(10000);
+    text = "注册完成  pass"
+    files.write("/sdcard/text_result.txt", text);
 
 
 //登录页
-staAt();
-if(className("android.view.ViewGroup").depth(6).exists()){
-    setText(0,"1170088800");
-    setText(1,"jdeng123456");
-    id("btn_sign").findOne().click();
-    sleep(3000);
-}
-else sleep(1000);
-
-//游客注册页
-/* if(className("android.widget.LinearLayout").depth(1).exists()){
-    id("btn_sure").findOne().click();
-    wait_fort('注册成功');
-    if(tosat == '注册成功'){
-        var text = "\n游客账号创建 pass";
-        files.append("/sdcard/text_result.txt", text);
-    }
-    else
-    {
-        var text = "\n游客账号创建 false";
-        files.append("/sdcard/text_result.txt", text);
-    }
-}*/
-
 app.startActivity({
     action: "View", 
     packageName:"com.sandboxol.blockymods",
-    className: "com.sandboxol.blockymods.view.activity.start.StartActivity",
+    className: "com.sandboxol.login.view.activity.login.LoginActivity",
     root: true
 });
-sleep(3000);
+console.log("login");
+waitForActivity("com.sandboxol.login.view.activity.login.LoginActivity");
 
+    setText(0,"1170088800");
+    setText(1,"a112233");
+    id("btn_sign").findOne().click();
+    sleep(3000);
+
+
+console.log("end");
 shell("am force-stop com.sandboxol.blockymods", true);
-
+console.clear();
 toast('end test');
