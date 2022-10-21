@@ -14,10 +14,13 @@ threads.start(function(){
 
 //强行打开登录页---------------------------------------------------------------
 function staLg(){
+<<<<<<< HEAD
 =======
 //强行打开登录页---------------------------------------------------------------
 function staAt(){
 >>>>>>> afa0e9d (调整顺序)
+=======
+>>>>>>> 6e099b8 (注册登录流程)
     app.startActivity({
         action: "View", 
         packageName:"com.sandboxol.blockymods",
@@ -29,7 +32,11 @@ function staAt(){
     sleep(3000);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 //重启app--------------------------------------------------------------------
+=======
+//重启app
+>>>>>>> 6e099b8 (注册登录流程)
 function staAt(){
     app.startActivity({
         action: "View", 
@@ -42,8 +49,11 @@ function staAt(){
     sleep(3000);
     
 }
+<<<<<<< HEAD
 =======
 >>>>>>> afa0e9d (调整顺序)
+=======
+>>>>>>> 6e099b8 (注册登录流程)
 //手机权限----------------------------------------------------------------------
 function Authority(){
     var str = "";
@@ -88,9 +98,13 @@ function Authority(){
 //用例执行入口
 toast('start test');
 <<<<<<< HEAD
+<<<<<<< HEAD
 shell("pm clear com.sandboxol.blockymods", true);
 =======
 >>>>>>> afa0e9d (调整顺序)
+=======
+shell("pm clear com.sandboxol.blockymods", true);
+>>>>>>> 6e099b8 (注册登录流程)
 launch('com.sandboxol.blockymods');
 
 var text = "test_start";
@@ -98,14 +112,31 @@ files.write("/sdcard/text_result.txt", text);
 sleep(5000);
 
 //调试窗口开启
+<<<<<<< HEAD
 //console.show();
 <<<<<<< HEAD
 =======
+=======
+console.show();
+>>>>>>> 6e099b8 (注册登录流程)
 
 //Authority();
 >>>>>>> afa0e9d (调整顺序)
 
 //注册账号----------------------------------------------------------------------------
+<<<<<<< HEAD
+=======
+/*app.startActivity({
+    action: "View", 
+    packageName:"com.sandboxol.blockymods",
+    className: "com.sandboxol.login.view.activity.login.LoginActivity",
+    data:"",
+    root: true
+});*/
+staAt();
+sleep(3000);
+
+>>>>>>> 6e099b8 (注册登录流程)
 if(id("tv_register").exists()){
     id("tv_register").findOne().click();
     sleep(1000);
@@ -126,8 +157,11 @@ function suiji(){
     ssnn = ss.toString();
     return ssnn;
 }
+<<<<<<< HEAD
 var activitytext = currentActivity();
 
+=======
+>>>>>>> 6e099b8 (注册登录流程)
 
 waitForActivity("com.sandboxol.center.view.activity.MTTemplateActivity");
     suiji();
@@ -137,6 +171,7 @@ waitForActivity("com.sandboxol.center.view.activity.MTTemplateActivity");
     className("android.widget.Button").findOne().click();
     sleep(2000);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 if(id("btn_sure").exists()){
     id("btn_sure").findOne().click();
@@ -158,31 +193,41 @@ if(className("android.widget.TextView").depth(14).text("用户名已存在")){
         }
         break;
     } 
+=======
+var text_1 = className("android.widget.TextView").depth(14).text("用户名已存在");
+    
+if(text_1 != null){
+        while(true){
+            ssnn = ++ssnn;
+            id("editAccount").setText("test"+ ssnn);
+            className("android.widget.Button").text("下一步").findOne().click();
+            sleep(2000);
+            console.log("not");
+            if(id("btn_sure").exists()){
+                break;
+            }
+    }
+>>>>>>> 6e099b8 (注册登录流程)
 }
-else if(className("android.widget.TextView").depth(14).text("账户不能为空")){
-    while(true){
-        suiji();
+/*else if(className("android.widget.TextView").depth(14).text("账户不能为空")){
+    while(text_1 != null){
+        ssnn = ++ssnn;
         setText(0,"test"+ ssnn);
-        className("android.widget.Button").findOne().click();
+        className("android.widget.Button").text("下一步").findOne().click();
         sleep(2000);
-        if(id("btu_sure").findOne().exists()){
-            break;
-        }
     } 
 } 
 else if(className("android.widget.TextView").depth(14).text("账号不能小于6位")){
-    while(true){
-        suiji();
+    while(text_1 != null){
+        ssnn = ++ssnn;
         setText(0,"test"+ ssnn);
-        className("android.widget.Button").findOne().click();
+        className("android.widget.Button").text("下一步").findOne().click();
         sleep(2000);
-        if(id("btu_sure").findOne().exists()){
-            break;
-        }
     } 
-} 
-else sleep(1000);
+} */
+else {sleep(1000)}
 
+<<<<<<< HEAD
     id("btu_sure").findOne().click();
 >>>>>>> afa0e9d (调整顺序)
     sleep(5000);
@@ -282,6 +327,11 @@ else if(id("textinput_helper_text").depth(14).findOne().text() != null){
 }
 
 waitForActivity("com.sandboxol.blockymods.view.activity.host.HostActivity");
+=======
+
+    console.log("2");
+    id("btn_sure").findOne().click();
+>>>>>>> 6e099b8 (注册登录流程)
     sleep(10000);
     text = "注册完成  pass"
     files.write("/sdcard/text_result.txt", text);
@@ -305,5 +355,8 @@ waitForActivity("com.sandboxol.login.view.activity.login.LoginActivity");
 
 console.log("end");
 shell("am force-stop com.sandboxol.blockymods", true);
+<<<<<<< HEAD
 console.clear();
+=======
+>>>>>>> 6e099b8 (注册登录流程)
 toast('end test');
