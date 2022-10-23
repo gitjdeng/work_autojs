@@ -1,10 +1,14 @@
 auto();
-//const lib = require("lib");
-events.observeToast();
-events.onToast(function(toast){
-    var pkg = toast.getPackageName();
-    log(toast.getText() + pkg);
+//var toastmonitor = require ('./toastmonitor');
+//const lib = require("./lib");
+var toasttext = "";
+threads.start(function(){
+    events.observeToast();
+    events.onToast(function(toast){
+    toasttext = toast.getText();
+    log(toast.getText());
 });
+})
 
 
 //强行打开登录页---------------------------------------------------------------
@@ -102,10 +106,12 @@ else{
 
 let ssnn;
 function suiji(){
-    ss = random(100,105);
+    ss = random(105,105);
     ssnn = ss.toString();
     return ssnn;
 }
+var activitytext = currentActivity();
+
 
 waitForActivity("com.sandboxol.center.view.activity.MTTemplateActivity");
     suiji();
@@ -115,9 +121,57 @@ waitForActivity("com.sandboxol.center.view.activity.MTTemplateActivity");
     className("android.widget.Button").findOne().click();
     sleep(2000);
 
-var activitytext = currentActivity();
+if(id("btn_sure").exists()){
+    id("btn_sure").findOne().click();
+    sleep(5000);
+    console.log(toasttext);
+    //出现用户名错误
+    if(toasttext = "账户名称已存在，请重新输入"){
+    while(true){
+        ssnn = ++ssnn;
+        id("editAccount").setText("test"+ ssnn);
+        className("android.widget.Button").text("下一步").findOne().click();
+        sleep(2000);
+        activitytext = currentActivity();
+        if(id("textinput_helper_text").depth(14).findOne().text() != "该名称可用"){
+            console.log("11");//lingshi
+            while(true){
+                id("iv_random_name").findOne().click();
+                sleep(1000);
+                id("btn_sure").findOne().click();
+                sleep(5000);
+                activitytext = currentActivity();
+                if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
+                    console.log("name-1");
+                    break;
+                }
+                else continue;
+            }
+        }
+        else if(id("textinput_helper_text").depth(14).findOne().text() = "该名称可用"){
+            console.log("22");//lingshi
+            while(true){
+                id("btn_sure").findOne().click();
+                sleep(5000);
+                activitytext = currentActivity();
+                if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
+                    console.log("name-2");
+                    break;
+                }
+                else continue
+            }
+        }
+        else if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
+            console.log("name-3");
+            break;
+        }
+        else continue;
+    }
+}
+}
 
-if(className("android.widget.TextView").depth(14).findOne().text() != null){
+//判断用户名规范
+else if(id("textinput_helper_text").depth(14).findOne().text() != null){
         while(true){
             ssnn = ++ssnn;
             id("editAccount").setText("test"+ ssnn);
@@ -133,46 +187,24 @@ if(className("android.widget.TextView").depth(14).findOne().text() != null){
                     id("btn_sure").findOne().click();
                     sleep(5000);
                     activitytext = currentActivity();
+                    console.log(toasttext);
                     if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
-                        console.log("2");
+                        console.log("test-name");
                         break;
                     }
                     else if(id("textinput_helper_text").findOne().text() != "该名称可用"){
                         while(true){
                             id("iv_random_name").findOne().click();
-                            sleep(1000);
+                            sleep(2000);
+                            console.log("mingceng")
+                            activitytext = currentActivity();
+                            if(id("textinput_helper_text").findOne().text() = "该名称可用"){
                             id("btn_sure").findOne().click();
                             sleep(5000);
-                            activitytext = currentActivity();
-                            console.log(toast);
-                            if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
-                                console.log("3");
-                                break;
-                            }
-                        }
-                    }
-                    else if(toast = "账户名称已存在，请重新输入"){
-                        while(true){
-                            ssnn = ++ssnn;
-                            id("editAccount").setText("test"+ ssnn);
-                            className("android.widget.Button").text("下一步").findOne().click();
-                            sleep(2000);
-                            activitytext = currentActivity();
-                            if(id("textinput_helper_text").findOne().text() != "该名称可用"){
-                                while(true){
-                                    id("iv_random_name").findOne().click();
-                                    sleep(1000);
-                                    id("btn_sure").findOne().click();
-                                    sleep(5000);
-                                    activitytext = currentActivity();
-                                    if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
-                                        console.log("8");
-                                        break;
-                                    }
-                                }
+                            console.log("zhuce");
                             }
                             else if(activitytext == "com.sandboxol.blockymods.view.activity.host.HostActivity"){
-                                console.log("7");
+                                console.log("3");
                                 break;
                             }
                         }
@@ -186,15 +218,8 @@ if(className("android.widget.TextView").depth(14).findOne().text() != null){
             }
     }
 }
-else if(id("btn_sure").exists()){
-    console.log("5");
-    id("btn_sure").findOne().click();
-    sleep(5000);
-}
 
-className("android.widget.Button").text("下一步").findOne().click();
-console.log("7");
-//waitForActivity("com.sandboxol.blockymods.view.activity.host.HostActivity");
+waitForActivity("com.sandboxol.blockymods.view.activity.host.HostActivity");
     sleep(10000);
     text = "注册完成  pass"
     files.write("/sdcard/text_result.txt", text);
